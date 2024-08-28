@@ -3,13 +3,19 @@ require("dotenv").config();
 const { todo } = require("./db");
 const { createTodo, updateTodo, deleteTodo } = require("./types");
 const express = require("express");
+const cors = require("cors");
 
 const app = express();
 app.use(express.json());
+app.use(
+  cors({
+    origin: "http://localhost:5173",
+  })
+);
 
 app.get("/todos", async (req, res) => {
   toDos = await todo.find({});
-  return res.json(toDos);
+  return res.json({ todos: toDos });
 });
 
 app.post("/todo", async (req, res) => {
