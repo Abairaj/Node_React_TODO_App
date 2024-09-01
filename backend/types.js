@@ -7,6 +7,7 @@ const createTodo = z.object({
 
 const updateTodo = z.object({
   id: z.string(),
+  completed:z.boolean()
 });
 
 const deleteTodo = z.string()

@@ -38,6 +38,7 @@ app.post("/todo", async (req, res) => {
 
 app.put("/completed", async (req, res) => {
   const payload = req.body;
+  console.log(payload)
   const validatedData = updateTodo.safeParse(payload);
   if (!validatedData.success) {
     res.status(411).json({
@@ -45,7 +46,7 @@ app.put("/completed", async (req, res) => {
     });
     return;
   }
-  await todo.updateOne({ _id: validatedData.data.id }, { completed: true });
+  await todo.updateOne({ _id: validatedData.data.id }, { completed: validatedData.data.completed });
   res.json({ msg: "Todo updated Successfully" });
 });
 
