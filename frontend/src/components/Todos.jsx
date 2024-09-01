@@ -27,7 +27,7 @@ export function Todos({ toDos }) {
                     headers: { "content-type": "application/json" },
                   }).then(async (response) => {
                     const json_data = await response.json();
-                    e.target.value = !e.target.value
+                    e.target.value = !e.target.value;
                   });
                 }}
                 size="small"
@@ -35,6 +35,14 @@ export function Todos({ toDos }) {
                 onChange={onChange}
               ></Checkbox>
               <Button
+                onClick={() => {
+                  fetch(`http://localhost:3000/todo/${todo._id}`, {
+                    method: "DELETE",
+                  }).then(async (response) => {
+                    const json_data = await response.json();
+                    alert("Deleted todo successfully");
+                  });
+                }}
                 size="small"
                 style={{ margin: "0 6px" }}
                 type="primary"
